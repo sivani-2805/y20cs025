@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct polynomial
+{
+    int coeff,expo;
+    struct polynomial *next;
+   
+}*head=NULL,*tail,*newn,*temp,*llist1,*llist2;
+struct polynomial *create(struct polynomial *head)
+{
+    int c,e,ch;
+    do{
+    newn=(struct polynomial *)malloc(sizeof(struct polynomial));
+    printf("enter coeff and expo values");
+    scanf("%d%d",&c,&e);
+    newn->coeff=c;
+    newn->expo=e;
+    newn->next=NULL;
+    if(head==NULL)
+    {
+        head=newn;
+        tail=newn;
+    }
+    else
+    {
+        tail->next=newn;
+        tail=newn;
+    }
+    printf("enter 1 for another term 0 to stop");
+    scanf("%d",&ch);
+    }while(ch==1);
+    return head;
+}
+int display(struct polynomial *head)
+{
+    temp=head;
+    while(temp!=NULL)
+    {
+        if(temp==head)
+        printf("%dx^%d",temp->coeff,temp->expo);
+        else
+        printf("+%dx^%d",temp->coeff,temp->expo);
+        temp=temp->next;
+    }
+    return 0;
+}
+void main()
+{
+    printf("enter your 1st polynomial\n");
+    llist1=create(head);
+    printf("enter your 2nd polynomial\n");
+    llist2=create(head);
+    display(llist1);
+    printf("\n");
+    display(llist2);
+}
+
